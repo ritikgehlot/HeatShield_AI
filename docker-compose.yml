@@ -1,0 +1,23 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: heatshield
+      POSTGRES_USER: heatshield
+      POSTGRES_PASSWORD: heatshield
+    ports:
+      - "5432:5432"
+    volumes:
+      - heatshield_postgres:/var/lib/postgresql/data
+
+  app:
+    build: .
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql+psycopg://heatshield:heatshield@db:5432/heatshield
+    ports:
+      - "8000:8000"
+
+volumes:
+  heatshield_postgres:

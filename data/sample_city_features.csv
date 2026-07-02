@@ -1,0 +1,2 @@
+city,name,latitude,longitude,map_x,map_y,lst_c,ndvi,ndbi,built_up_pct,road_density_km_km2,population_density,vulnerability_index,data_source
+Jodhpur,Example Ward,26.2500,73.0200,50,50,48.2,0.18,0.72,78,6.4,18500,0.63,Validated local dataset

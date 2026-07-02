@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="HeatShield AI urban heat mitigation dashboard" />
+  <title>HeatShield AI | Urban Heat Decision Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <img src="/team_ars_logo.png" alt="TEAM-ARS logo" />
+        <div><strong>HeatShield</strong><span>AI Decision Platform</span></div>
+      </div>
+      <nav>
+        <a class="active" href="#dashboard"><span>▦</span> Dashboard</a>
+        <a href="#map"><span>◉</span> Heat Risk Map</a>
+        <a href="#simulator"><span>↻</span> Scenario Lab</a>
+        <a href="#data"><span>⇪</span> Data Pipeline</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="team-card">
+          <span class="dot"></span>
+          <div><strong>TEAM-ARS</strong><small>AI for a Cooler Tomorrow</small></div>
+        </div>
+        <p>Prototype v1.0<br />Hackathon demo build</p>
+      </div>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">URBAN HEAT ACTION CONSOLE</p>
+          <h1>HeatShield AI</h1>
+          <p class="subhead">Find heat hotspots. Prioritise cooling. Measure the plan.</p>
+        </div>
+        <div class="top-actions">
+          <span class="demo-badge">● Demo data mode</span>
+          <button class="secondary" id="downloadTemplate">Download data template</button>
+        </div>
+      </header>
+
+      <section class="hero-strip">
+        <div class="city-chip"><span>⌖</span><div><small>Selected city</small><strong id="cityName">Jodhpur, Rajasthan</strong></div></div>
+        <div class="hero-copy"><strong>Decision objective:</strong> focus limited budgets on wards with the highest combined heat exposure and population vulnerability.</div>
+        <div class="timestamp"><small>Last model refresh</small><strong id="updatedAt">—</strong></div>
+      </section>
+
+      <section class="metrics" aria-label="City heat metrics">
+        <article class="metric-card"><div class="metric-icon amber">☼</div><div><p>Average LST</p><strong id="avgLst">—</strong><span>Land surface temperature</span></div></article>
+        <article class="metric-card"><div class="metric-icon red">!</div><div><p>High-risk wards</p><strong id="highRisk">—</strong><span>Priority action zones</span></div></article>
+        <article class="metric-card"><div class="metric-icon green">♧</div><div><p>Average NDVI</p><strong id="avgNdvi">—</strong><span>Green-cover indicator</span></div></article>
+        <article class="metric-card"><div class="metric-icon blue">⌁</div><div><p>City heat score</p><strong id="avgRisk">—</strong><span>Composite risk index</span></div></article>
+      </section>
+
+      <section id="dashboard" class="section-title-row">
+        <div>
+          <p class="eyebrow">LIVE ANALYSIS</p>
+          <h2>Ward-level heat risk map</h2>
+          <p>Click any ward marker to see drivers, recommendations and scenario impacts.</p>
+        </div>
+        <div class="legend"><span><i class="legend-low"></i>Low</span><span><i class="legend-medium"></i>Medium</span><span><i class="legend-high"></i>High</span><span><i class="legend-extreme"></i>Extreme</span></div>
+      </section>
+
+      <section id="map" class="workspace-grid">
+        <article class="map-card">
+          <div class="card-toolbar">
+            <div><strong>Jodhpur heat layer</strong><span>Ward-centric spatial view</span></div>
+            <span class="layer-pill">LST + NDVI + built-up</span>
+          </div>
+          <div class="map-canvas" id="mapCanvas" role="list" aria-label="Interactive Jodhpur ward heat map">
+            <div class="map-sun"></div>
+            <div class="terrain terrain-one"></div><div class="terrain terrain-two"></div>
+            <div class="road road-one"></div><div class="road road-two"></div><div class="road road-three"></div>
+            <div class="map-label north">N</div><div class="map-label city">JODHPUR</div>
+            <div id="wardMarkers"></div>
+            <div class="map-footnote">Prototype geometry — import real ward boundaries for production mapping.</div>
+          </div>
+        </article>
+
+        <article class="insight-card" id="selectedWardCard">
+          <div class="card-toolbar compact"><div><span class="eyebrow">SELECTED WARD</span><h3 id="wardName">Loading...</h3></div><span id="riskPill" class="risk-pill">—</span></div>
+          <div class="risk-score-row"><div><span>Heat Risk Score</span><strong id="wardScore">—</strong></div><div class="radial" id="scoreCircle"><span id="scoreCircleText">—</span></div></div>
+          <div class="feature-grid">
+            <div><span>LST</span><strong id="wardLst">—</strong></div><div><span>NDVI</span><strong id="wardNdvi">—</strong></div>
+            <div><span>Built-up</span><strong id="wardBuilt">—</strong></div><div><span>Vulnerability</span><strong id="wardVulnerability">—</strong></div>
+          </div>
+          <div class="drivers"><h4>Why this ward is hot</h4><ul id="driverList"></ul></div>
+          <div class="recommend"><h4>AI-recommended next actions</h4><ol id="recommendationList"></ol></div>
+          <button class="primary full" id="jumpToSimulator">Open scenario lab <span>→</span></button>
+        </article>
+      </section>
+
+      <section id="simulator" class="section-title-row scenario-title">
+        <div><p class="eyebrow">WHAT-IF SIMULATOR</p><h2>Test a cooling package before spending</h2><p>Adjust intervention coverage and compare the estimated heat-risk change.</p></div>
+        <div class="model-tag">Random Forest prototype + transparent scenario rules</div>
+      </section>
+
+      <section class="scenario-grid">
+        <article class="controls-card">
+          <div class="scenario-ward">Scenario target: <strong id="scenarioWard">—</strong></div>
+          <label>Cool-roof coverage <span id="roofValue">35%</span><input id="coolRoof" type="range" min="0" max="100" value="35" /></label>
+          <p>Reflective roofing on priority public buildings and dense housing.</p>
+          <label>Green-cover target <span id="treeValue">8%</span><input id="treeCover" type="range" min="0" max="20" value="8" /></label>
+          <p>Additional canopy through native trees, pocket parks and green corridors.</p>
+          <label>Shaded public assets <span id="shadeValue">10</span><input id="shadeUnits" type="range" min="0" max="50" value="10" /></label>
+          <p>Bus stops, market shade, water points and walkable heat-safe segments.</p>
+          <label>Indicative budget <span id="budgetValue">₹15L</span><input id="budget" type="range" min="1" max="80" value="15" /></label>
+          <button id="runSimulation" class="primary full">Run impact simulation <span>↻</span></button>
+        </article>
+
+        <article class="impact-card">
+          <div class="card-toolbar"><div><strong>Scenario impact</strong><span>Relative planning estimate</span></div><span class="calc-status" id="calcStatus">Ready</span></div>
+          <div class="comparison">
+            <div class="score-box"><span>Baseline risk</span><strong id="baselineScore">—</strong><small id="baselineLevel">—</small></div>
+            <div class="arrow">→</div>
+            <div class="score-box projected"><span>Projected risk</span><strong id="projectedScore">—</strong><small id="projectedLevel">—</small></div>
+          </div>
+          <div class="reduction-band"><span>Estimated risk reduction</span><strong id="riskReduction">—</strong><span>Projected LST: <b id="projectedLst">—</b></span></div>
+          <div class="impact-list"><h4>Intervention package</h4><ul id="impactList"><li>Run the simulation to generate an intervention package.</li></ul></div>
+          <div class="brief"><div class="brief-icon">✦</div><div><span>AI ACTION BRIEF</span><p id="actionBrief">Choose a ward and run the simulator to receive a concise implementation plan.</p></div></div>
+          <p class="model-note" id="modelNote">All results are prototype estimates; validate with local observations before policy deployment.</p>
+        </article>
+      </section>
+
+      <section id="data" class="data-section">
+        <div><p class="eyebrow">DATA PIPELINE</p><h2>Move from demo data to validated city data</h2><p>Upload a ward-level CSV with satellite, urban and vulnerability features. The backend recomputes risk scores and recommendations.</p></div>
+        <div class="data-actions">
+          <label class="upload-zone" for="csvUpload"><input id="csvUpload" type="file" accept=".csv" hidden /><span class="upload-icon">⇪</span><strong>Upload ward CSV</strong><small>CSV only · one row per ward</small></label>
+          <button class="secondary" id="uploadButton">Import data</button>
+          <p id="uploadMessage" class="upload-message"></p>
+        </div>
+      </section>
+
+      <footer>Built by <strong>TEAM-ARS</strong> · HeatShield AI · Prototype for climate-resilient urban planning</footer>
+    </main>
+  </div>
+  <script src="/app.js"></script>
+</body>
+</html>
