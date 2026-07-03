@@ -67,7 +67,7 @@ function renderWard(ward) {
 }
 
 function riskColor(level) {
-  const colors = { Low: '#22a85a', Medium: '#d79500', High: '#f97316', Extreme: '#ef4444' };
+  const colors = { Low: '#22a85a', Moderate: '#d79500', Medium: '#d79500', High: '#f97316', Severe: '#e8590c', Extreme: '#ef4444' };
   return colors[level] || '#687689';
 }
 

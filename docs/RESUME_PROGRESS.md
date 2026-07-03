@@ -84,3 +84,16 @@ pytest -q
 uvicorn backend.main:app --reload
 ```
 Then open http://127.0.0.1:8000 — this works today, before any V2 changes.
+
+---
+
+## UPDATE — Milestone 1 complete
+
+Everything in this file's original "broken/unfinished" list has been built,
+wired up, and verified: 13-table schema, transparent risk engine, 4 provider
+adapters, intervention optimizer, 16-ward seed data, full V2 API + preserved
+legacy endpoints, CLI bug fixed. **Full test suite: 19/19 passing.** See
+`docs/SESSION_HANDOFF.md` for the detailed breakdown — this file is kept
+in sync with it rather than duplicating every detail here.
+
+Next: Milestone 2, the React/TypeScript/Vite/Tailwind/MapLibre frontend.

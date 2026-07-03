@@ -1,194 +1,60 @@
+"""FastAPI application assembly.
+
+Serves the built React frontend (frontend/dist) when it exists; falls back to
+the original static/ dashboard otherwise, so the app is never left with no UI
+at all mid-migration. API routes are always mounted first so /api/* is never
+shadowed by the static-file catch-all.
+"""
 from __future__ import annotations
 
-import csv
-import io
 from contextlib import asynccontextmanager
-from datetime import datetime
 from pathlib import Path
 
-from fastapi import Depends, FastAPI, File, HTTPException, UploadFile
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import StreamingResponse
 from fastapi.staticfiles import StaticFiles
-from sqlalchemy import func, select
-from sqlalchemy.orm import Session
 
+from .config import log_startup_config, settings
 from .db import SessionLocal, init_db
-from .models import ScenarioRun, Ward
-from .risk_engine import recommendations, simulate
-from .schemas import ScenarioOut, ScenarioRequest, SummaryOut, UploadResult, WardOut
+from .routers import cities, data, health, legacy, reports, simulations, wards
 from .seed import seed_database
-from .services import csv_template_rows, import_wards_from_csv, serialize_ward, ward_features
+from .services import refresh_data_source_status
 
 STATIC_DIR = Path(__file__).resolve().parent / "static"
+FRONTEND_DIST_DIR = Path(__file__).resolve().parent.parent / "frontend" / "dist"
 
 
 @asynccontextmanager
 async def lifespan(_: FastAPI):
+    log_startup_config()
     init_db()
     with SessionLocal() as session:
         seed_database(session)
+        refresh_data_source_status(session)
     yield
 
 
 app = FastAPI(
     title="HeatShield AI API",
-    version="1.0.0",
-    description="Urban heat risk mapping and cooling-intervention simulator.",
+    version="2.0.0",
+    description="Urban heat risk mapping, explainable scoring, and cooling-intervention decision support.",
     lifespan=lifespan,
 )
+
+allowed_origins = ["*"] if settings.app_env != "production" else [settings.frontend_url]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Restrict this in production.
+    allow_origins=allowed_origins,
     allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+for router_module in (health, cities, wards, data, simulations, reports, legacy):
+    app.include_router(router_module.router)
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-
-
-@app.get("/api/health")
-def health_check():
-    return {"status": "ok", "service": "HeatShield AI"}
-
-
-@app.get("/api/wards", response_model=list[WardOut])
-def list_wards(city: str | None = None, db: Session = Depends(get_db)):
-    query = select(Ward).order_by(Ward.risk_score.desc())
-    if city:
-        query = query.where(Ward.city == city)
-    wards = db.scalars(query).all()
-    return [serialize_ward(ward) for ward in wards]
-
-
-@app.get("/api/wards/{ward_id}", response_model=WardOut)
-def get_ward(ward_id: int, db: Session = Depends(get_db)):
-    ward = db.get(Ward, ward_id)
-    if not ward:
-        raise HTTPException(status_code=404, detail="Ward not found")
-    return serialize_ward(ward)
-
-
-@app.get("/api/summary", response_model=SummaryOut)
-def get_summary(db: Session = Depends(get_db)):
-    wards = db.scalars(select(Ward)).all()
-    if not wards:
-        raise HTTPException(status_code=404, detail="No wards available")
-    return {
-        "city": wards[0].city,
-        "total_wards": len(wards),
-        "high_risk_wards": sum(ward.risk_score >= 60 for ward in wards),
-        "average_risk_score": round(sum(ward.risk_score for ward in wards) / len(wards), 1),
-        "average_lst_c": round(sum(ward.lst_c for ward in wards) / len(wards), 1),
-        "green_cover_average": round(sum(ward.ndvi for ward in wards) / len(wards), 2),
-        "data_note": "Prototype uses seeded demo ward data. Import validated satellite/field features before operational use.",
-    }
-
-
-@app.post("/api/simulate", response_model=ScenarioOut)
-def run_simulation(payload: ScenarioRequest, db: Session = Depends(get_db)):
-    ward = db.get(Ward, payload.ward_id)
-    if not ward:
-        raise HTTPException(status_code=404, detail="Ward not found")
-
-    result = simulate(
-        ward_features(ward),
-        payload.cool_roof_coverage,
-        payload.tree_cover_gain,
-        payload.shade_units,
-    )
-    baseline = result["baseline"]
-    projected = result["projected"]
-    actions = result["intervention_summary"]
-
-    action_brief = (
-        f"For {ward.name}, prioritise a phased heat-action package: {', '.join(actions)}. "
-        f"The prototype estimates the Heat Risk Score could move from {baseline.score:.1f}/100 "
-        f"to {projected.score:.1f}/100, subject to local validation and implementation quality. "
-        f"Start with public buildings, high-footfall locations and vulnerable population clusters."
-    )
-
-    db.add(
-        ScenarioRun(
-            ward_id=ward.id,
-            cool_roof_coverage=payload.cool_roof_coverage,
-            tree_cover_gain=payload.tree_cover_gain,
-            shade_units=payload.shade_units,
-            budget_lakh=payload.budget_lakh,
-            baseline_score=baseline.score,
-            projected_score=projected.score,
-            projected_lst_c=result["projected_lst_c"],
-        )
-    )
-    db.commit()
-
-    return {
-        "ward_id": ward.id,
-        "ward_name": ward.name,
-        "baseline_score": baseline.score,
-        "projected_score": projected.score,
-        "risk_reduction": result["risk_reduction"],
-        "baseline_lst_c": ward.lst_c,
-        "projected_lst_c": result["projected_lst_c"],
-        "risk_level": projected.risk_level,
-        "intervention_summary": actions,
-        "action_brief": action_brief,
-        "model_note": "Planning comparison generated by a reproducible prototype ML model; validate against local observations before policy deployment.",
-    }
-
-
-@app.post("/api/data/upload", response_model=UploadResult)
-async def upload_ward_data(file: UploadFile = File(...), db: Session = Depends(get_db)):
-    if not file.filename or not file.filename.lower().endswith(".csv"):
-        raise HTTPException(status_code=400, detail="Please upload a .csv file.")
-    try:
-        raw = await file.read()
-        imported, updated, skipped = import_wards_from_csv(db, raw)
-    except ValueError as exc:
-        raise HTTPException(status_code=400, detail=str(exc)) from exc
-    return {
-        "imported": imported,
-        "updated": updated,
-        "skipped": skipped,
-        "message": "Data imported. Risk scores and recommendations were recomputed.",
-    }
-
-
-@app.get("/api/data/template")
-def download_csv_template():
-    rows = list(csv_template_rows())
-    buffer = io.StringIO()
-    writer = csv.DictWriter(buffer, fieldnames=list(rows[0].keys()))
-    writer.writeheader()
-    writer.writerows(rows)
-    return StreamingResponse(
-        iter([buffer.getvalue()]),
-        media_type="text/csv",
-        headers={"Content-Disposition": "attachment; filename=heatshield_import_template.csv"},
-    )
-
-
-@app.get("/api/recent-scenarios")
-def recent_scenarios(db: Session = Depends(get_db)):
-    runs = db.scalars(select(ScenarioRun).order_by(ScenarioRun.created_at.desc()).limit(8)).all()
-    return [
-        {
-            "id": run.id,
-            "ward_id": run.ward_id,
-            "baseline_score": run.baseline_score,
-            "projected_score": run.projected_score,
-            "created_at": run.created_at,
-        }
-        for run in runs
-    ]
-
-
-# This must be mounted after API routes so that `/api/*` remains reachable.
-app.mount("/", StaticFiles(directory=STATIC_DIR, html=True), name="static")
+# Static mount must come last so it never shadows /api/* routes.
+if FRONTEND_DIST_DIR.exists():
+    app.mount("/", StaticFiles(directory=FRONTEND_DIST_DIR, html=True), name="frontend")
+elif STATIC_DIR.exists():
+    app.mount("/", StaticFiles(directory=STATIC_DIR, html=True), name="static")
