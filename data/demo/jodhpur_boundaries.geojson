@@ -1,0 +1,157 @@
+{
+  "type": "FeatureCollection",
+  "name": "Jodhpur Ward Boundaries (Demo)",
+  "description": "DEMO DATA — Approximate rectangular ward boundaries for HeatShield AI development. These are NOT official administrative boundaries. Replace with official ward shapefiles for production use.",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:EPSG::4326"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "ward_id": "W001", "ward_name": "Mandore" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[73.032, 26.393], [73.052, 26.393], [73.052, 26.409], [73.032, 26.409], [73.032, 26.393]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "ward_id": "W002", "ward_name": "Paota" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[73.014, 26.294], [73.034, 26.294], [73.034, 26.310], [73.014, 26.310], [73.014, 26.294]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "ward_id": "W003", "ward_name": "BJS Colony" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[73.021, 26.321], [73.041, 26.321], [73.041, 26.337], [73.021, 26.337], [73.021, 26.321]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "ward_id": "W004", "ward_name": "Sardarpura" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[72.994, 26.269], [73.014, 26.269], [73.014, 26.285], [72.994, 26.285], [72.994, 26.269]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "ward_id": "W005", "ward_name": "Ratanada" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[73.027, 26.243], [73.047, 26.243], [73.047, 26.259], [73.027, 26.259], [73.027, 26.243]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "ward_id": "W006", "ward_name": "Sojati Gate" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[73.010, 26.280], [73.026, 26.280], [73.026, 26.294], [73.010, 26.294], [73.010, 26.280]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "ward_id": "W007", "ward_name": "Shastri Nagar" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[73.036, 26.265], [73.056, 26.265], [73.056, 26.281], [73.036, 26.281], [73.036, 26.265]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "ward_id": "W008", "ward_name": "Basni" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[73.074, 26.219], [73.094, 26.219], [73.094, 26.235], [73.074, 26.235], [73.074, 26.219]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "ward_id": "W009", "ward_name": "Chopasni" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[72.983, 26.241], [73.003, 26.241], [73.003, 26.257], [72.983, 26.257], [72.983, 26.241]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "ward_id": "W010", "ward_name": "Kudi" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[73.052, 26.199], [73.072, 26.199], [73.072, 26.215], [73.052, 26.215], [73.052, 26.199]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "ward_id": "W011", "ward_name": "Nai Sadak" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[73.008, 26.286], [73.024, 26.286], [73.024, 26.300], [73.008, 26.300], [73.008, 26.286]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "ward_id": "W012", "ward_name": "Pal Road" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[72.955, 26.246], [72.975, 26.246], [72.975, 26.262], [72.955, 26.262], [72.955, 26.246]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "ward_id": "W013", "ward_name": "Pratap Nagar" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[73.011, 26.227], [73.031, 26.227], [73.031, 26.243], [73.011, 26.243], [73.011, 26.227]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "ward_id": "W014", "ward_name": "Mahamandir" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[73.000, 26.302], [73.020, 26.302], [73.020, 26.318], [73.000, 26.318], [73.000, 26.302]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "ward_id": "W015", "ward_name": "Banar" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[72.950, 26.337], [72.970, 26.337], [72.970, 26.353], [72.950, 26.353], [72.950, 26.337]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "ward_id": "W016", "ward_name": "Sangariya" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[73.070, 26.357], [73.090, 26.357], [73.090, 26.373], [73.070, 26.373], [73.070, 26.357]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "ward_id": "W017", "ward_name": "Jodhpur Fort Area" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[73.016, 26.292], [73.032, 26.292], [73.032, 26.304], [73.016, 26.304], [73.016, 26.292]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "ward_id": "W018", "ward_name": "Masuria Hills" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[73.045, 26.310], [73.065, 26.310], [73.065, 26.326], [73.045, 26.326], [73.045, 26.310]]]
+      }
+    }
+  ]
+}
