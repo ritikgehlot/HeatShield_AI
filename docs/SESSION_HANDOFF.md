@@ -1,59 +1,56 @@
-# Session Handoff — HeatShield AI V2
+# Session Handoff — HeatShield AI V2 (FINAL)
 
-Written after actually running the code, not from memory of what was intended.
-See also `docs/RESUME_PROGRESS.md`, kept in sync with this file.
+Written after actually running everything described. Kept in sync with
+`docs/RESUME_PROGRESS.md`.
 
-## MILESTONE 1 — Core working platform: COMPLETE AND VERIFIED
+## Status: all milestones implemented and verified
 
-- Repo audited; one real bug found in the original prototype (CLI script
-  `sys.path` issue) and fixed.
-- Git: `main` = true unmodified baseline, `feature/live-platform-v2` = all V2 work.
-- 13-table schema (`backend/models.py`), transparent hybrid risk engine
-  (`backend/risk_engine.py`, replacing the old RandomForest-on-synthetic-data
-  wrapper), 4 provider adapters (`backend/providers/`), intervention optimizer
-  + what-if simulator (`backend/interventions.py`), 16-ward seed dataset
-  (`backend/seed.py`), full V2 API (`backend/routers/`), legacy V1 endpoints
-  preserved unchanged (`backend/routers/legacy.py`).
-- **Full test suite: 19/19 passing.** App boots cleanly; every endpoint hit
-  with real HTTP requests, not assumed working.
-- CLI import script bug fixed and re-verified — the exact command
-  README documents now works with no `PYTHONPATH` workaround.
-- Two real bugs found and fixed *while building* the V2 layer itself: the
-  dashboard weather/satellite display used to show a bare "error" tile
-  instead of falling back to labeled demo values when live fetch fails with
-  nothing cached; and the Data Sources status check used to assert "live"
-  for weather based on static config rather than an actual fetch attempt.
-  Both fixed so "demo always works" and "never claim fake live status" hold
-  in practice, not just in intent.
-- Honest limitation, unchanged from the plan: live weather/satellite/OSM HTTP
-  calls are written correctly but this sandbox's network can't reach their
-  domains, so they're verified via graceful-failure paths here, not a real
-  successful live fetch. Verify on your own machine.
+### Backend (Milestone 1) — COMPLETE
+- 13-table schema, transparent hybrid risk engine (replaced RF-on-synthetic),
+  4 provider adapters, intervention optimizer + what-if simulator, 16-ward
+  Jodhpur seed, full V2 API + preserved legacy V1 endpoints.
+- **19/19 backend tests pass.** Every endpoint verified via real HTTP.
+- CLI import bug fixed; Alembic baseline migration applies and creates all tables.
 
-## MILESTONE 2 — Premium dashboard UI: IN PROGRESS NEXT
+### Frontend (Milestones 2–5) — COMPLETE
+- React + TS + Vite + Tailwind + MapLibre + TanStack Query + Recharts + Radix.
+- Landing, Dashboard (map + KPIs + charts + table), Ward Detail (exact
+  per-factor explainability), What-If Simulator, Data Sources (upload + status),
+  Model/About. Skeleton/empty/error states, keyboard focus, reduced-motion,
+  mobile drawer, metric tooltips.
+- **Type-check clean, production build succeeds**, backend serves the built SPA.
 
-No frontend code exists yet beyond the original static HTML/CSS/JS (kept,
-still functional, served as a fallback if `frontend/dist` isn't built).
-Building: React + TypeScript + Vite + Tailwind + MapLibre + TanStack Query +
-Recharts + Lucide in `frontend/`.
+### Live providers (Milestone 6) — COMPLETE (architecture) / needs your keys (live)
+- Demo works with zero keys. Weather defaults to keyless Open-Meteo. Satellite
+  shows labeled demo scene or "not configured" — never fake live. Graceful
+  cached/error fallback throughout.
+- Live HTTP paths written against documented API shapes but not executed against
+  real endpoints in the build sandbox (network restricted) — verify locally.
 
-## API keys or datasets still required
+### Infra + docs (Milestone 7) — COMPLETE
+- `.env.example` (placeholders only), secure `.gitignore`, multi-stage
+  Dockerfile + PostGIS/Redis compose, Alembic, sample datasets + templates.
+- Docs: README, ARCHITECTURE_V2, MODEL_CARD, DATA_SOURCES, DEMO_SCRIPT_V2,
+  IMPLEMENTATION_PLAN_V2, this file. Secret scan clean.
 
-Nothing for demo mode. For live modes: `WEATHER_API_KEY` only for the
-OpenWeatherMap path (Open-Meteo needs none), GEE service-account credentials
-for satellite, Copernicus credentials as an alternative, and an authoritative
-Jodhpur ward-boundary GeoJSON if you have one (seeded ones are simplified
-placeholders).
+## Not verifiable in the build sandbox (verify locally)
+- Real live external API fetches (network restricted to package registries).
+- `docker compose up` (no Docker daemon).
+- On-screen visual QA / screenshots (no reachable headless browser).
 
-## Commands to run the app locally — verified working
+## API keys / datasets you still need (only for live mode)
+- `WEATHER_API_KEY` — only for the OpenWeatherMap path (Open-Meteo needs none).
+- GEE service-account creds (`GEE_*`) for satellite; or Copernicus creds.
+- `MAP_PROVIDER_KEY` — only if you want a keyed basemap (keyless works).
+- Authoritative Jodhpur ward-boundary GeoJSON to replace placeholder polygons.
 
-```bash
+## Run locally (verified)
+```powershell
 cd heatshield-ai
 python -m venv .venv
-# Windows PowerShell: .\.venv\Scripts\Activate.ps1
-# macOS/Linux:        source .venv/bin/activate
+.\.venv\Scripts\Activate.ps1     # macOS/Linux: source .venv/bin/activate
 pip install -r requirements.txt
-pytest -q                              # 19 passed
+pytest -q                        # 19 passed
 uvicorn backend.main:app --reload
+# open http://127.0.0.1:8000
 ```
-Then open http://127.0.0.1:8000.

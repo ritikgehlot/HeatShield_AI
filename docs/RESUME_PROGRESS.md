@@ -97,3 +97,14 @@ legacy endpoints, CLI bug fixed. **Full test suite: 19/19 passing.** See
 in sync with it rather than duplicating every detail here.
 
 Next: Milestone 2, the React/TypeScript/Vite/Tailwind/MapLibre frontend.
+
+---
+
+## FINAL UPDATE — all milestones complete
+
+Backend (13 tables, explainable engine, providers, optimizer, full API, 19
+passing tests), premium React frontend (6 pages, builds clean, served by
+backend), infra (.env.example, Docker+PostGIS+Redis, Alembic), sample datasets,
+and all docs are done and verified. See `docs/SESSION_HANDOFF.md` for the full
+final status and the list of things that need your own machine to verify
+(live API fetches, docker compose, screenshots).

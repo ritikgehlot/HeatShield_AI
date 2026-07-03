@@ -1,0 +1,565 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Mandore",
+        "city": "Jodhpur",
+        "note": "Simplified placeholder boundary, not official"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              73.036,
+              26.395
+            ],
+            [
+              73.048,
+              26.395
+            ],
+            [
+              73.048,
+              26.407
+            ],
+            [
+              73.036,
+              26.407
+            ],
+            [
+              73.036,
+              26.395
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Paota",
+        "city": "Jodhpur",
+        "note": "Simplified placeholder boundary, not official"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              73.018,
+              26.296
+            ],
+            [
+              73.03,
+              26.296
+            ],
+            [
+              73.03,
+              26.308
+            ],
+            [
+              73.018,
+              26.308
+            ],
+            [
+              73.018,
+              26.296
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "BJS Colony",
+        "city": "Jodhpur",
+        "note": "Simplified placeholder boundary, not official"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              73.025,
+              26.323
+            ],
+            [
+              73.037,
+              26.323
+            ],
+            [
+              73.037,
+              26.335
+            ],
+            [
+              73.025,
+              26.335
+            ],
+            [
+              73.025,
+              26.323
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Sardarpura",
+        "city": "Jodhpur",
+        "note": "Simplified placeholder boundary, not official"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.998,
+              26.271
+            ],
+            [
+              73.01,
+              26.271
+            ],
+            [
+              73.01,
+              26.283
+            ],
+            [
+              72.998,
+              26.283
+            ],
+            [
+              72.998,
+              26.271
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Ratanada",
+        "city": "Jodhpur",
+        "note": "Simplified placeholder boundary, not official"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              73.031,
+              26.245
+            ],
+            [
+              73.043,
+              26.245
+            ],
+            [
+              73.043,
+              26.257
+            ],
+            [
+              73.031,
+              26.257
+            ],
+            [
+              73.031,
+              26.245
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Sojati Gate",
+        "city": "Jodhpur",
+        "note": "Simplified placeholder boundary, not official"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              73.012,
+              26.281
+            ],
+            [
+              73.024,
+              26.281
+            ],
+            [
+              73.024,
+              26.293
+            ],
+            [
+              73.012,
+              26.293
+            ],
+            [
+              73.012,
+              26.281
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Shastri Nagar",
+        "city": "Jodhpur",
+        "note": "Simplified placeholder boundary, not official"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              73.04,
+              26.267
+            ],
+            [
+              73.052,
+              26.267
+            ],
+            [
+              73.052,
+              26.279
+            ],
+            [
+              73.04,
+              26.279
+            ],
+            [
+              73.04,
+              26.267
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Basni",
+        "city": "Jodhpur",
+        "note": "Simplified placeholder boundary, not official"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              73.078,
+              26.221
+            ],
+            [
+              73.09,
+              26.221
+            ],
+            [
+              73.09,
+              26.233
+            ],
+            [
+              73.078,
+              26.233
+            ],
+            [
+              73.078,
+              26.221
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Chopasni",
+        "city": "Jodhpur",
+        "note": "Simplified placeholder boundary, not official"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.987,
+              26.243
+            ],
+            [
+              72.999,
+              26.243
+            ],
+            [
+              72.999,
+              26.255
+            ],
+            [
+              72.987,
+              26.255
+            ],
+            [
+              72.987,
+              26.243
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Kudi",
+        "city": "Jodhpur",
+        "note": "Simplified placeholder boundary, not official"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              73.056,
+              26.201
+            ],
+            [
+              73.068,
+              26.201
+            ],
+            [
+              73.068,
+              26.213
+            ],
+            [
+              73.056,
+              26.213
+            ],
+            [
+              73.056,
+              26.201
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Nai Sadak",
+        "city": "Jodhpur",
+        "note": "Simplified placeholder boundary, not official"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              73.01,
+              26.287
+            ],
+            [
+              73.022,
+              26.287
+            ],
+            [
+              73.022,
+              26.299
+            ],
+            [
+              73.01,
+              26.299
+            ],
+            [
+              73.01,
+              26.287
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Pal Road",
+        "city": "Jodhpur",
+        "note": "Simplified placeholder boundary, not official"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.959,
+              26.248
+            ],
+            [
+              72.971,
+              26.248
+            ],
+            [
+              72.971,
+              26.26
+            ],
+            [
+              72.959,
+              26.26
+            ],
+            [
+              72.959,
+              26.248
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Airport Road",
+        "city": "Jodhpur",
+        "note": "Simplified placeholder boundary, not official"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              73.043,
+              26.253
+            ],
+            [
+              73.055,
+              26.253
+            ],
+            [
+              73.055,
+              26.265
+            ],
+            [
+              73.043,
+              26.265
+            ],
+            [
+              73.043,
+              26.253
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Banar",
+        "city": "Jodhpur",
+        "note": "Simplified placeholder boundary, not official"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              73.064,
+              26.328
+            ],
+            [
+              73.076,
+              26.328
+            ],
+            [
+              73.076,
+              26.34
+            ],
+            [
+              73.064,
+              26.34
+            ],
+            [
+              73.064,
+              26.328
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Jalori Gate",
+        "city": "Jodhpur",
+        "note": "Simplified placeholder boundary, not official"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              73.025,
+              26.275
+            ],
+            [
+              73.037,
+              26.275
+            ],
+            [
+              73.037,
+              26.287
+            ],
+            [
+              73.025,
+              26.287
+            ],
+            [
+              73.025,
+              26.275
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Circuit House",
+        "city": "Jodhpur",
+        "note": "Simplified placeholder boundary, not official"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              73.032,
+              26.288
+            ],
+            [
+              73.044,
+              26.288
+            ],
+            [
+              73.044,
+              26.3
+            ],
+            [
+              73.032,
+              26.3
+            ],
+            [
+              73.032,
+              26.288
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

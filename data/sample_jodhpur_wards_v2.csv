@@ -1,0 +1,17 @@
+city,ward_id,ward_name,observed_at,latitude,longitude,lst_c,air_temp_c,humidity_pct,wind_speed_mps,ndvi,ndbi,built_up_pct,road_density_km_km2,population_density,vulnerability_index,source,confidence
+Jodhpur,,Mandore,2026-07-03T10:17:46+00:00,26.401,73.042,49.4,40.6,23,3.1,0.16,0.73,79,5.2,12800,0.66,Seeded demo dataset (labelled),0.6
+Jodhpur,,Paota,2026-07-03T10:17:46+00:00,26.302,73.024,51.1,41.2,21,2.8,0.1,0.81,88,7.6,24100,0.71,Seeded demo dataset (labelled),0.6
+Jodhpur,,BJS Colony,2026-07-03T10:17:46+00:00,26.329,73.031,47.8,40.1,25,3.4,0.25,0.62,69,4.8,15300,0.55,Seeded demo dataset (labelled),0.6
+Jodhpur,,Sardarpura,2026-07-03T10:17:46+00:00,26.277,73.004,50.6,41.0,22,2.6,0.12,0.84,90,8.2,27600,0.68,Seeded demo dataset (labelled),0.6
+Jodhpur,,Ratanada,2026-07-03T10:17:46+00:00,26.251,73.037,44.6,39.4,27,3.7,0.38,0.49,56,4.1,9800,0.42,Seeded demo dataset (labelled),0.6
+Jodhpur,,Sojati Gate,2026-07-03T10:17:46+00:00,26.287,73.018,52.2,41.6,19,2.3,0.08,0.89,93,9.4,30100,0.79,Seeded demo dataset (labelled),0.6
+Jodhpur,,Shastri Nagar,2026-07-03T10:17:46+00:00,26.273,73.046,48.9,40.3,24,3.2,0.18,0.7,77,6.1,17200,0.59,Seeded demo dataset (labelled),0.6
+Jodhpur,,Basni,2026-07-03T10:17:46+00:00,26.227,73.084,53.1,41.9,18,2.4,0.06,0.92,95,6.9,14400,0.63,Seeded demo dataset (labelled),0.6
+Jodhpur,,Chopasni,2026-07-03T10:17:46+00:00,26.249,72.993,45.2,39.6,28,3.9,0.34,0.52,58,3.3,8700,0.37,Seeded demo dataset (labelled),0.6
+Jodhpur,,Kudi,2026-07-03T10:17:46+00:00,26.207,73.062,49.8,40.7,23,3.0,0.19,0.74,80,5.0,11300,0.53,Seeded demo dataset (labelled),0.6
+Jodhpur,,Nai Sadak,2026-07-03T10:17:46+00:00,26.293,73.016,51.7,41.4,20,2.5,0.09,0.87,92,9.1,29400,0.76,Seeded demo dataset (labelled),0.6
+Jodhpur,,Pal Road,2026-07-03T10:17:46+00:00,26.254,72.965,43.9,39.0,29,4.1,0.43,0.43,47,2.8,6400,0.31,Seeded demo dataset (labelled),0.6
+Jodhpur,,Airport Road,2026-07-03T10:17:46+00:00,26.259,73.049,46.5,39.8,26,3.5,0.29,0.55,61,4.4,10200,0.46,Seeded demo dataset (labelled),0.6
+Jodhpur,,Banar,2026-07-03T10:17:46+00:00,26.334,73.07,45.9,39.7,27,3.6,0.31,0.51,54,3.6,7600,0.4,Seeded demo dataset (labelled),0.6
+Jodhpur,,Jalori Gate,2026-07-03T10:17:46+00:00,26.281,73.031,52.6,41.8,18,2.2,0.07,0.9,94,9.8,31200,0.81,Seeded demo dataset (labelled),0.6
+Jodhpur,,Circuit House,2026-07-03T10:17:46+00:00,26.294,73.038,46.8,39.9,25,3.3,0.33,0.48,55,3.9,9100,0.44,Seeded demo dataset (labelled),0.6

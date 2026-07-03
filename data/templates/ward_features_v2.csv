@@ -1,0 +1,2 @@
+city,ward_id,ward_name,observed_at,latitude,longitude,lst_c,air_temp_c,humidity_pct,wind_speed_mps,ndvi,ndbi,built_up_pct,road_density_km_km2,population_density,vulnerability_index,source,confidence
+Jodhpur,,Example Ward,2026-07-01T10:00:00,26.2500,73.0200,48.2,40.5,24,3.2,0.18,0.72,78,6.4,18500,0.63,Validated local dataset,0.85

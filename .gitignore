@@ -3,18 +3,29 @@ __pycache__/
 *.py[cod]
 .venv/
 venv/
+*.egg-info/
 .pytest_cache/
 
-# Local app data
-heatshield.db
-*.sqlite
+# Databases (never commit local data)
 *.db
+*.sqlite3
+heatshield.db
+test_heatshield.db
+
+# Secrets — NEVER commit
 .env
+.env.*
+!.env.example
+*.pem
+*-credentials.json
+gee-service-account*.json
 
-# OS/editor
+# Node
+node_modules/
+frontend/.vite/
+
+# OS / editor
 .DS_Store
-.vscode/
 .idea/
-
-# Generated uploads
-uploads/
+.vscode/
+*.swp

@@ -1,11 +1,25 @@
+# --- Core (required) ---
 fastapi>=0.115,<1.0
 uvicorn[standard]>=0.30,<1.0
 SQLAlchemy>=2.0,<3.0
 pydantic>=2.8,<3.0
 python-multipart>=0.0.9,<1.0
-scikit-learn>=1.5,<2.0
-numpy>=1.26,<3.0
-pandas>=2.2,<3.0
-psycopg[binary]>=3.2,<4.0
-pytest>=8.0,<9.0
 httpx>=0.27,<1.0
+pytest>=8.0,<9.0
+
+# --- Database ---
+# psycopg is only needed for PostgreSQL; SQLite (default) needs nothing extra.
+psycopg[binary]>=3.2,<4.0
+alembic>=1.13,<2.0
+
+# --- Optional: only needed if you load a real validated ML model ---
+# The default risk engine is a transparent pure-Python formula and does NOT
+# require these. Install them only if you provide a trained model via
+# risk_engine.load_trained_model().
+# scikit-learn>=1.5,<2.0
+# numpy>=1.26,<3.0
+# pandas>=2.2,<3.0
+# joblib>=1.4,<2.0
+
+# --- Optional: satellite live providers (install when configuring live mode) ---
+# earthengine-api>=1.0    # for SATELLITE_PROVIDER=gee
