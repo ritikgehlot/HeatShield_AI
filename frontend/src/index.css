@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-canvas text-ink font-body antialiased;
+    background-image: radial-gradient(ellipse 1200px 600px at 50% -10%, rgba(91, 127, 222, 0.12), transparent);
+  }
+  h1, h2, h3, h4 {
+    @apply font-display tracking-tight;
+  }
+  ::selection {
+    background: rgba(91, 127, 222, 0.35);
+  }
+
+  /* Visible keyboard focus everywhere, not just on inputs */
+  :focus-visible {
+    outline: 2px solid #5B7FDE;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-surface/70 backdrop-blur-xl border border-border rounded-xl2 shadow-glass;
+  }
+  .grid-texture {
+    background-image: theme("backgroundImage.grid-lines");
+    background-size: theme("backgroundSize.grid");
+  }
+  .mono-tag {
+    @apply font-mono text-[11px] tracking-wide uppercase text-ink-faint;
+  }
+}
+
+/* Thin, styled scrollbars so long panels don't look default-browser */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(139, 158, 219, 0.25); border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(139, 158, 219, 0.4); }
