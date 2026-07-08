@@ -183,3 +183,11 @@ git push origin feature/live-platform-v2
 - Live external API calls are implemented against documented API shapes but were
   developed where outbound network was restricted — verify live paths locally.
 - This is **decision support**, not automated policy. See the Model Card.
+
+---
+
+## Contributing
+
+Contributions are welcome! HeatShield AI is open to improvements that make the platform more useful, transparent, and easier to run for new users. Good first contributions include documentation improvements, UI polish, test cases, sample data updates, small backend fixes, and new cooling-intervention ideas. Please keep the project’s honesty principle intact: demo or cached data should always be clearly labelled, and every heat-risk insight should remain transparent, explainable, source-aware, and useful for decision support rather than automated policy decisions.
+
+--
