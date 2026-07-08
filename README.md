@@ -1,6 +1,6 @@
 # HeatShield AI — Live Urban Heat Intelligence Platform
 
-**Team ARS** · Primary demo city: **Jodhpur, Rajasthan**
+**Team ARS** · Primary demo city: **mandore,Jodhpur, Rajasthan,342004**
 
 Ward-by-ward urban heat risk, explained transparently, with costed cooling
 interventions municipal teams can act on. Runs in **demo mode with zero API
